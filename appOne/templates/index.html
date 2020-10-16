@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja Gold</title>
+  
+    <style>
+        div.scroll {
+            display: list-item;
+            width: 600px;
+            height: 200px;
+            overflow-y: auto;
+            text-align: left;
+            padding: 20px;
+            border-style: solid;
+        }
+        p.positive {
+            color: green;
+        }
+        p.negative {
+            color: red;
+        }
+        ul {
+            list-style-type: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Ninja Gold!</h1>
+    <div>
+        <h2>Your Gold:</h2>
+        <textarea name='your_gold1' rows='1' cols='10'>{{request.session.your_gold}}</textarea>
+    </div>
+    <div>
+        <div>
+            <h3>Farm</h3>
+            <p>(earns 10-20 gold)</p>
+            <form action='/process_gold' method='post'>
+            {% csrf_token %}
+                <input name='property' type='hidden' value='farm'>
+                <button type='submit'>Find Gold!</button>
+            </form>
+        </div>
+        <div>
+            <h3>Cave</h3>
+            <p>(earns 5-10 gold)</p>
+            <form action='/process_gold' method='post'>
+            {% csrf_token %}
+                <input name='property' type='hidden' value='cave'>
+                <button type='submit'>Find Gold!</button>
+            </form>
+        </div>
+        <div>
+            <h3>House</h3>
+            <p>(earns 2-5 gold)</p>
+            <form action='/process_gold' method='post'>
+            {% csrf_token %}
+                <input name='property' type='hidden' value='house'>
+                <button type='submit'>Find Gold!</button>
+            </form>
+        </div>
+        <div>
+            <h3>Casino</h3>
+            <p>(earns/takes 0-50 gold)</p>
+            <form action='/process_gold' method='post'>
+            {% csrf_token %}
+                <input name='property' type='hidden' value='casino'>
+                <button type='submit'>Find Gold!</button>
+            </form>
+        </div>
+    </div>
+    <h5>Activities:</h5>
+    
+   
+    <div class='scroll' >
+       
+        <ul>
+
+            <li>{{ request.session.activitieslog|safe }}</li>
+        </ul>
+                
+        
+       <!-- <textarea rows='10' cols='100'>{{request.session.activitieslog|safe}}</textarea><br> -->
+    </div>
+</body>
+
+</html>
